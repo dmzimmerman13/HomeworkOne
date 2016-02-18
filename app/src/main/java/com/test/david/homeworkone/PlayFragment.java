@@ -125,6 +125,7 @@ public class PlayFragment extends Fragment {
                             .commit();
                 }
                 else {
+                    // TODO: add fragment stuff
                     choiceTwo = "Cleveland Browns";
                 }
             }
