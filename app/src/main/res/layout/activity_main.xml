@@ -18,5 +18,28 @@
         android:layout_centerHorizontal="true"
         android:weightSum="1">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quiz Game"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:textSize="50sp"
+            android:layout_marginTop="50dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:id="@+id/startButton"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.16"
+            android:textSize="50dp"
+            android:layout_marginTop="300dp"
+            android:background="#ff0000"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:onClick="playPressed"/>
+
     </LinearLayout>
 </RelativeLayout>
