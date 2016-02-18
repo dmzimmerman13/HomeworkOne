@@ -7,6 +7,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Button;
 
 
 /**
@@ -24,10 +26,15 @@ public class PlayFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String choiceOne;
+    private String choiceTwo;
 
     private OnFragmentInteractionListener mListener;
+
+    private TextView question;
+    private Button answerOne;
+    private Button answerTwo;
+
 
     public PlayFragment() {
         // Required empty public constructor
@@ -55,8 +62,8 @@ public class PlayFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            choiceOne = getArguments().getString(ARG_PARAM1);
+            choiceTwo = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -64,8 +71,70 @@ public class PlayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_play, container, false);
+        View view = inflater.inflate(R.layout.fragment_play, container, false);
+
+        question = (TextView)view.findViewById(R.id.question);
+        answerOne = (Button)view.findViewById(R.id.answerOne);
+        answerTwo = (Button)view.findViewById(R.id.answerTwo);
+
+
+        if (choiceOne == null){
+            question.setText("What is the capital of Wisconsin");
+            answerOne.setText("Fond du Lac");
+            answerTwo.setText("Madison");
+        }
+        else {
+            question.setText("Which is the better Football Team");
+            answerOne.setText("New England Patriots");
+            answerTwo.setText("Cleveland Browns");
+        }
+
+        return view;
     }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        answerOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (choiceOne == null) {
+                    getFragmentManager()
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.fragment_container, PlayFragment.newInstance("Fond du Lac", null))
+                            .commit();
+                } else {
+                    // TODO: New Fragment stuff and send it to the PlayFragment2
+                    choiceTwo = "New England Patriots";
+                }
+            }
+        });
+
+
+        answerTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if (choiceOne == null) {
+                    getFragmentManager()
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.fragment_container, PlayFragment.newInstance("Madison", null))
+                            .commit();
+                }
+                else {
+                    choiceTwo = "Cleveland Browns";
+                }
+            }
+        });
+    }
+
+
+
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
