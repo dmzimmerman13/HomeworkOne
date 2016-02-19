@@ -85,7 +85,7 @@ public class PlayFragment extends Fragment {
             answerTwo.setText("Madison");
         }
         else {
-            question.setText("Which is the better Football Team");
+            question.setText("Which Football Team is the Best Ever?");
             answerOne.setText("New England Patriots");
             answerTwo.setText("Cleveland Browns");
         }
