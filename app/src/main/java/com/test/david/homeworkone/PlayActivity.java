@@ -4,7 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.net.Uri;
 
-public class PlayActivity extends AppCompatActivity implements PlayFragment.OnFragmentInteractionListener {
+public class PlayActivity extends AppCompatActivity implements PlayFragment.OnFragmentInteractionListener,
+        PlayFragment2.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

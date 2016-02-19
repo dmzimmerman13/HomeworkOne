@@ -1,12 +1,17 @@
 package com.test.david.homeworkone;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Button;
 
 
 /**
@@ -24,8 +29,13 @@ public class PlayFragment2 extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String firstScore;
     private String mParam2;
+
+    private EditText userAnswer;
+    private Button submit;
+    private String answer;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -45,7 +55,7 @@ public class PlayFragment2 extends Fragment {
     public static PlayFragment2 newInstance(String param1, String param2) {
         PlayFragment2 fragment = new PlayFragment2();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM1, param1); //this is now score
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -55,7 +65,7 @@ public class PlayFragment2 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            firstScore = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -64,7 +74,31 @@ public class PlayFragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_play_fragment2, container, false);
+        View view = inflater.inflate(R.layout.fragment_play_fragment2, container, false);
+
+
+        submit = (Button)view.findViewById(R.id.submit);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userAnswer = (EditText)view.findViewById(R.id.userAnswer);
+                answer = userAnswer.getText().toString().trim();
+                userAnswer.setText("");
+
+                gameLogic();
+            }
+        });
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -89,6 +123,39 @@ public class PlayFragment2 extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void gameLogic() {
+        int finalScore = Integer.parseInt(firstScore);
+        if (answer.equals("Five") || answer.equals("five") || answer.equals("5")){
+            finalScore++;
+        }
+
+        displayScore(finalScore);
+    }
+
+
+    private void displayScore(int score){
+        String s = "" + score;
+
+        new AlertDialog.Builder(getActivity())
+                .setCancelable(true)
+                .setTitle("Your Score is:")
+                .setMessage(s)
+                .setPositiveButton("Replay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getFragmentManager().popBackStack();
+                        getFragmentManager().popBackStack();
+                    }
+                })
+                .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getActivity().finish();
+                    }
+                })
+                .show();
     }
 
     /**

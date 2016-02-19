@@ -34,6 +34,7 @@ public class PlayFragment extends Fragment {
     private TextView question;
     private Button answerOne;
     private Button answerTwo;
+    private String score;
 
 
     public PlayFragment() {
@@ -107,8 +108,8 @@ public class PlayFragment extends Fragment {
                             .replace(R.id.fragment_container, PlayFragment.newInstance("Fond du Lac", null))
                             .commit();
                 } else {
-                    // TODO: New Fragment stuff and send it to the PlayFragment2
                     choiceTwo = "New England Patriots";
+                    gameLogic();
                 }
             }
         });
@@ -125,8 +126,8 @@ public class PlayFragment extends Fragment {
                             .commit();
                 }
                 else {
-                    // TODO: add fragment stuff
                     choiceTwo = "Cleveland Browns";
+                    gameLogic();
                 }
             }
         });
@@ -159,6 +160,25 @@ public class PlayFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void gameLogic() {
+        int s = 0;
+        if (choiceOne == "Madison"){
+            s++;
+        }
+
+        if (choiceTwo == "New England Patriots"){
+            s++;
+        }
+
+        score = "" + s;
+
+        getFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, PlayFragment2.newInstance(score, null))
+                .commit();
     }
 
     /**

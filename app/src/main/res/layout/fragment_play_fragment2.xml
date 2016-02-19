@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="How many windows are on the house?"
-        android:id="@+id/textView2"
+        android:id="@+id/question"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="310dp"
         android:textSize="30dp"
@@ -28,7 +28,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/userAnswer"
         android:layout_gravity="center_horizontal|top"
         android:hint="Answer"
         android:layout_marginTop="390dp" />
@@ -37,9 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:id="@+id/button"
+        android:id="@+id/submit"
         android:layout_gravity="center_horizontal|top"
-        android:textSize="30dp"
-        android:layout_marginTop="450dp" />
+        android:textSize="10dp"
+        android:layout_marginTop="440dp" />
 
 </FrameLayout>
